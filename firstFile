@@ -1,0 +1,168 @@
+\documentclass[12pt]{beamer}
+\usetheme{Warsaw}
+\usepackage[utf8]{inputenc}
+\usepackage[vietnamese]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\author{5 anh em siêu nhân }
+\title{Matlab app with App designer}
+%\setbeamercovered{transparent} 
+%\setbeamertemplate{navigation symbols}{} 
+%\logo{} 
+%\institute{} 
+\date{\textbf{\begin{huge} It's show time \end{huge}}} 
+%\subject{} 
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+%\begin{frame}
+%\tableofcontents
+%\end{frame}
+
+%\begin{frame}
+%\tableofcontents
+%\end{frame}
+
+% Work Hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+
+\section{Introduction}
+\begin{frame}{App with Matlab}
+	\begin{itemize}
+		\item \textcolor{red}{ Appdesigner là gì ?}
+
+		$\rightarrow$ \textcolor{blue}{Là môi trường sử dụng GUI (giao diện người dùng đồ họa) trong MATLAB.}
+		
+		$\rightarrow$ \textcolor{blue}{Khái niệm GUI}
+		
+		
+
+		\item \textcolor<1>{red}{ Appdesigner làm được những gì ?}
+
+		$\rightarrow$ \textcolor{blue}{Tạo app, phát triển ứng dụng}
+		
+		$\rightarrow$ \textcolor{blue}{Hoạt động dựa trên nền tảng Matlab}
+		
+		$\rightarrow$ \textcolor{blue}{Dễ dàng kết hợp với các ngôn ngữ khác}
+		
+		
+	\end{itemize}
+\end{frame}
+\section{interface}
+\begin{frame}{Start Working}
+\textbf{Let's get right on!}
+
+We can start App designer by
+	\begin{itemize}
+		\item typing 'appdesigner' in the command line
+		\item click Apps $\rightarrow$ Design app on the toolbar
+	\end{itemize}
+Make a blank app or open an existed one.
+
+\end{frame}
+
+\begin{frame}{InterFace}
+\includegraphics[scale=0.25]{Interface.png}
+\end{frame}
+
+	\begin{frame}{Objects}
+		\begin{center}
+		\includegraphics[scale=0.4]{appComponent.png}
+		\end{center}
+	\end{frame}
+
+
+\section{Functionality}
+%	How to use, modify, interact
+\begin{frame}{Property}
+	\begin{center}
+		\includegraphics[scale=0.5]{property.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Callback}
+	\begin{center}
+		\includegraphics[scale=1.4]{cb.png}
+	\end{center}
+\end{frame}
+% Work Hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+
+
+\section{Example}
+
+
+\begin{frame}{Set up}
+	\begin{columns}
+		\begin{column}{0.3\textwidth}
+			\begin{itemize}
+%				\setbeamercovered{invisible}
+%				\begin{large}
+				\item \only<1> {Create some button then rename it}
+				\item \only<2> {Modify its property}
+				\item \only<3> {set each component's callback}
+%				\end{large}
+			\end{itemize}	
+		\end{column}
+		\begin{column}{0.7\textwidth}  
+			\begin{center}
+				\includegraphics[scale=0.3]{calLayout.png}
+    		\end{center}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Callback}
+	\begin{columns}
+		\begin{column}{0.15\textwidth}
+   			callback
+		\end{column}
+		\begin{column}{0.85\textwidth}  
+			\begin{center}
+				\includegraphics[scale=0.7]{callback.png}
+    		\end{center}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Variable}
+	\begin{columns}
+		\begin{column}{0.15\textwidth}
+   			Variable declaration
+		\end{column}
+		\begin{column}{0.85\textwidth}  
+			\begin{center}
+				\includegraphics[scale=0.7]{variable.png}
+    		\end{center}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Callback code}
+	\begin{columns}
+		\begin{column}{0\textwidth}
+   			
+		\end{column}
+		\begin{column}{1\textwidth}  
+			\begin{center}
+				\includegraphics[scale=0.35]{callbackCode.png}
+    		\end{center}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\begin{center}
+	\begin{Huge}
+	\textcolor{brown}{Thanks for watching !}
+	\end{Huge}
+	\includegraphics[scale=0.1]{angel.jpg}
+	
+	$\color{red} \heartsuit\heartsuit\heartsuit$ \textcolor{red}{Love you guys} $\color{red} \heartsuit\heartsuit\heartsuit$
+	\end{center}
+		
+\end{frame}
+\end{document}
