@@ -1,0 +1,380 @@
+classdef Plotting < matlab.apps.AppBase
+
+    % Properties that correspond to app components
+    properties (Access = public)
+        UIFigure                    matlab.ui.Figure
+        ButtonGroup                 matlab.ui.container.ButtonGroup
+        hy                          matlab.ui.control.RadioButton
+        Legasov                     matlab.ui.control.RadioButton
+        Thanh                       matlab.ui.control.RadioButton
+        Nhat                        matlab.ui.control.RadioButton
+        HuyButton                   matlab.ui.control.RadioButton
+        SizeSliderLabel             matlab.ui.control.Label
+        SizeSlider                  matlab.ui.control.Slider
+        Image                       matlab.ui.control.Image
+        Image2                      matlab.ui.control.Image
+        AllisnumberPythagorasLabel  matlab.ui.control.Label
+        Text                        matlab.ui.control.TextArea
+        Button_2                    matlab.ui.control.Button
+        Button_3                    matlab.ui.control.Button
+        Button_4                    matlab.ui.control.Button
+        Button_5                    matlab.ui.control.Button
+        Button_6                    matlab.ui.control.Button
+        Button_7                    matlab.ui.control.Button
+        Button_8                    matlab.ui.control.Button
+        Button_9                    matlab.ui.control.Button
+        Button_10                   matlab.ui.control.Button
+        Button_11                   matlab.ui.control.Button
+        Button_12                   matlab.ui.control.Button
+        Button_13                   matlab.ui.control.Button
+        Button_14                   matlab.ui.control.Button
+        Button_16                   matlab.ui.control.Button
+        Button_17                   matlab.ui.control.Button
+        ClearButton                 matlab.ui.control.Button
+        AnsButton                   matlab.ui.control.Button
+        HatButton_2                 matlab.ui.control.StateButton
+        UserNameLabel               matlab.ui.control.Label
+        UserNameEditField           matlab.ui.control.EditField
+        waht                        matlab.ui.control.Button
+        laydu                       matlab.ui.control.Button
+    end
+
+    
+    properties (Access = private)
+        ans=0;
+        preans=0;
+        imageSize=0;
+    end
+    
+
+    % Callbacks that handle component events
+    methods (Access = private)
+
+        % Button pushed function: Button_10, Button_11, Button_12, 
+        % Button_14, Button_16, Button_17, Button_2, Button_3, 
+        % Button_4, Button_5, Button_6, Button_7, Button_8, 
+        % Button_9, laydu, waht
+        function setText(app, event)
+            app.Text.Value = [app.Text.Value{1} event.Source.Text]
+        end
+
+        % Button pushed function: Button_13
+        function evaluate(app, event)
+            try
+                ans=eval(app.Text.Value{1});
+                app.Text.Value = [app.Text.Value{1} event.Source.Text num2str(ans) ]
+            catch
+                app.Text.Value = 'Clear plz';
+            end
+        end
+
+        % Selection changed function: ButtonGroup
+        function setCharacter(app, event)
+            selectedButton = app.ButtonGroup.SelectedObject;
+            switch(selectedButton)
+                case app.Legasov
+                    app.Image.ImageSource = 'Legasov.jpg'
+                case app.HuyButton
+                    app.Image.ImageSource = '1.jpg'
+                case app.Nhat
+                    app.Image.ImageSource = '2.jpg'
+                case app.Thanh
+                    app.Image.ImageSource = 'corgi.jpg'
+                case app.hy
+                    app.Image.ImageSource = 'beethoven.jpg'
+            end
+        end
+
+        % Button pushed function: ClearButton
+        function clear(app, event)
+            app.Text.Value = '';
+        end
+
+        % Button pushed function: AnsButton
+        function getAns(app, event)
+            app.Text.Value = [app.Text.Value{1} ans]
+        end
+
+        % Value changed function: SizeSlider
+        function setSize(app, event)
+            change = event.Value - app.imageSize;
+            app.imageSize = event.Value;
+            app.Image.Position = app.Image.Position + [-change/2 -change/2 change change]
+        end
+
+        % Value changed function: HatButton_2
+        function hatChange(app, event)
+            value = app.HatButton_2.Value;
+            if value == true;
+                app.Image2.ImageSource = 'cowboyHat.jpg';
+            else app.Image2.ImageSource = 'marioHat.jpg';
+            end
+        end
+
+        % Callback function
+        function pie(app, event)
+            app.Text.Value = [app.Text.Value{1} '^'];
+        end
+    end
+
+    % Component initialization
+    methods (Access = private)
+
+        % Create UIFigure and components
+        function createComponents(app)
+
+            % Create UIFigure and hide until all components are created
+            app.UIFigure = uifigure('Visible', 'off');
+            app.UIFigure.Color = [1 1 1];
+            app.UIFigure.Position = [100 100 937 648];
+            app.UIFigure.Name = 'UI Figure';
+
+            % Create ButtonGroup
+            app.ButtonGroup = uibuttongroup(app.UIFigure);
+            app.ButtonGroup.SelectionChangedFcn = createCallbackFcn(app, @setCharacter, true);
+            app.ButtonGroup.Title = 'Button Group';
+            app.ButtonGroup.Position = [12 447 233 135];
+
+            % Create hy
+            app.hy = uiradiobutton(app.ButtonGroup);
+            app.hy.Text = 'Hari Yenes''s';
+            app.hy.Position = [11 89 88 22];
+
+            % Create Legasov
+            app.Legasov = uiradiobutton(app.ButtonGroup);
+            app.Legasov.Text = 'Valery Legasov';
+            app.Legasov.Position = [11 67 104 22];
+            app.Legasov.Value = true;
+
+            % Create Thanh
+            app.Thanh = uiradiobutton(app.ButtonGroup);
+            app.Thanh.Tooltip = {'dfgdfgdfsg'};
+            app.Thanh.Text = 'Thành';
+            app.Thanh.Position = [11 46 65 22];
+
+            % Create Nhat
+            app.Nhat = uiradiobutton(app.ButtonGroup);
+            app.Nhat.Text = 'Nhật';
+            app.Nhat.Position = [11 25 52 22];
+
+            % Create HuyButton
+            app.HuyButton = uiradiobutton(app.ButtonGroup);
+            app.HuyButton.Text = 'Huy';
+            app.HuyButton.Position = [11 4 52 22];
+
+            % Create SizeSliderLabel
+            app.SizeSliderLabel = uilabel(app.UIFigure);
+            app.SizeSliderLabel.HorizontalAlignment = 'right';
+            app.SizeSliderLabel.Position = [123 51 29 22];
+            app.SizeSliderLabel.Text = 'Size';
+
+            % Create SizeSlider
+            app.SizeSlider = uislider(app.UIFigure);
+            app.SizeSlider.Limits = [-100 100];
+            app.SizeSlider.ValueChangedFcn = createCallbackFcn(app, @setSize, true);
+            app.SizeSlider.Position = [173 60 150 3];
+
+            % Create Image
+            app.Image = uiimage(app.UIFigure);
+            app.Image.Position = [127 130 189 193];
+            app.Image.ImageSource = 'beethoven.jpg';
+
+            % Create Image2
+            app.Image2 = uiimage(app.UIFigure);
+            app.Image2.Position = [83 287 289 102];
+            app.Image2.ImageSource = 'marioHat.jpg';
+
+            % Create AllisnumberPythagorasLabel
+            app.AllisnumberPythagorasLabel = uilabel(app.UIFigure);
+            app.AllisnumberPythagorasLabel.HorizontalAlignment = 'right';
+            app.AllisnumberPythagorasLabel.FontSize = 18;
+            app.AllisnumberPythagorasLabel.Position = [500 296 123 58];
+            app.AllisnumberPythagorasLabel.Text = {'"All is number"'; '-Pythagoras'};
+
+            % Create Text
+            app.Text = uitextarea(app.UIFigure);
+            app.Text.Position = [628 296 249 60];
+
+            % Create Button_2
+            app.Button_2 = uibutton(app.UIFigure, 'push');
+            app.Button_2.ButtonPushedFcn = createCallbackFcn(app, @setText, true);
+            app.Button_2.FontSize = 20;
+            app.Button_2.Position = [523 524 100 32];
+            app.Button_2.Text = '1';
+
+            % Create Button_3
+            app.Button_3 = uibutton(app.UIFigure, 'push');
+            app.Button_3.ButtonPushedFcn = createCallbackFcn(app, @setText, true);
+            app.Button_3.FontSize = 20;
+            app.Button_3.Position = [653 524 100 32];
+            app.Button_3.Text = '2';
+
+            % Create Button_4
+            app.Button_4 = uibutton(app.UIFigure, 'push');
+            app.Button_4.ButtonPushedFcn = createCallbackFcn(app, @setText, true);
+            app.Button_4.FontSize = 20;
+            app.Button_4.Position = [792 524 100 32];
+            app.Button_4.Text = '3';
+
+            % Create Button_5
+            app.Button_5 = uibutton(app.UIFigure, 'push');
+            app.Button_5.ButtonPushedFcn = createCallbackFcn(app, @setText, true);
+            app.Button_5.FontSize = 20;
+            app.Button_5.Position = [523 477 100 32];
+            app.Button_5.Text = '4';
+
+            % Create Button_6
+            app.Button_6 = uibutton(app.UIFigure, 'push');
+            app.Button_6.ButtonPushedFcn = createCallbackFcn(app, @setText, true);
+            app.Button_6.FontSize = 20;
+            app.Button_6.Position = [653 477 100 32];
+            app.Button_6.Text = '5';
+
+            % Create Button_7
+            app.Button_7 = uibutton(app.UIFigure, 'push');
+            app.Button_7.ButtonPushedFcn = createCallbackFcn(app, @setText, true);
+            app.Button_7.FontSize = 20;
+            app.Button_7.Position = [792 477 100 32];
+            app.Button_7.Text = '6';
+
+            % Create Button_8
+            app.Button_8 = uibutton(app.UIFigure, 'push');
+            app.Button_8.ButtonPushedFcn = createCallbackFcn(app, @setText, true);
+            app.Button_8.FontSize = 20;
+            app.Button_8.Position = [523 427 100 32];
+            app.Button_8.Text = '7';
+
+            % Create Button_9
+            app.Button_9 = uibutton(app.UIFigure, 'push');
+            app.Button_9.ButtonPushedFcn = createCallbackFcn(app, @setText, true);
+            app.Button_9.FontSize = 20;
+            app.Button_9.Position = [653 427 100 32];
+            app.Button_9.Text = '8';
+
+            % Create Button_10
+            app.Button_10 = uibutton(app.UIFigure, 'push');
+            app.Button_10.ButtonPushedFcn = createCallbackFcn(app, @setText, true);
+            app.Button_10.FontSize = 20;
+            app.Button_10.Position = [792 427 100 32];
+            app.Button_10.Text = '9';
+
+            % Create Button_11
+            app.Button_11 = uibutton(app.UIFigure, 'push');
+            app.Button_11.ButtonPushedFcn = createCallbackFcn(app, @setText, true);
+            app.Button_11.FontSize = 20;
+            app.Button_11.Position = [396 477 100 32];
+            app.Button_11.Text = '+';
+
+            % Create Button_12
+            app.Button_12 = uibutton(app.UIFigure, 'push');
+            app.Button_12.ButtonPushedFcn = createCallbackFcn(app, @setText, true);
+            app.Button_12.FontSize = 20;
+            app.Button_12.Position = [396 427 100 32];
+            app.Button_12.Text = '-';
+
+            % Create Button_13
+            app.Button_13 = uibutton(app.UIFigure, 'push');
+            app.Button_13.ButtonPushedFcn = createCallbackFcn(app, @evaluate, true);
+            app.Button_13.FontSize = 20;
+            app.Button_13.Position = [792 374 100 32];
+            app.Button_13.Text = '=';
+
+            % Create Button_14
+            app.Button_14 = uibutton(app.UIFigure, 'push');
+            app.Button_14.ButtonPushedFcn = createCallbackFcn(app, @setText, true);
+            app.Button_14.FontSize = 20;
+            app.Button_14.Position = [653 374 100 32];
+            app.Button_14.Text = '0';
+
+            % Create Button_16
+            app.Button_16 = uibutton(app.UIFigure, 'push');
+            app.Button_16.ButtonPushedFcn = createCallbackFcn(app, @setText, true);
+            app.Button_16.FontSize = 20;
+            app.Button_16.Position = [396 374 100 32];
+            app.Button_16.Text = '*';
+
+            % Create Button_17
+            app.Button_17 = uibutton(app.UIFigure, 'push');
+            app.Button_17.ButtonPushedFcn = createCallbackFcn(app, @setText, true);
+            app.Button_17.FontSize = 20;
+            app.Button_17.Position = [523 374 100 32];
+            app.Button_17.Text = '/';
+
+            % Create ClearButton
+            app.ClearButton = uibutton(app.UIFigure, 'push');
+            app.ClearButton.ButtonPushedFcn = createCallbackFcn(app, @clear, true);
+            app.ClearButton.FontSize = 20;
+            app.ClearButton.Position = [396 524 100 32];
+            app.ClearButton.Text = 'Clear';
+
+            % Create AnsButton
+            app.AnsButton = uibutton(app.UIFigure, 'push');
+            app.AnsButton.ButtonPushedFcn = createCallbackFcn(app, @getAns, true);
+            app.AnsButton.FontSize = 20;
+            app.AnsButton.Position = [395 322 100 32];
+            app.AnsButton.Text = 'Ans';
+
+            % Create HatButton_2
+            app.HatButton_2 = uibutton(app.UIFigure, 'state');
+            app.HatButton_2.ValueChangedFcn = createCallbackFcn(app, @hatChange, true);
+            app.HatButton_2.Text = 'Hat';
+            app.HatButton_2.Position = [13 405 100 22];
+
+            % Create UserNameLabel
+            app.UserNameLabel = uilabel(app.UIFigure);
+            app.UserNameLabel.HorizontalAlignment = 'right';
+            app.UserNameLabel.FontSize = 30;
+            app.UserNameLabel.FontColor = [0 0 1];
+            app.UserNameLabel.Position = [407 177 166 37];
+            app.UserNameLabel.Text = 'User Name:';
+
+            % Create UserNameEditField
+            app.UserNameEditField = uieditfield(app.UIFigure, 'text');
+            app.UserNameEditField.FontSize = 30;
+            app.UserNameEditField.FontAngle = 'italic';
+            app.UserNameEditField.FontColor = [1 0.0745 0.651];
+            app.UserNameEditField.Position = [588 174.599998474121 243 39.4000015258789];
+            app.UserNameEditField.Value = 'Hari Yenes';
+
+            % Create waht
+            app.waht = uibutton(app.UIFigure, 'push');
+            app.waht.ButtonPushedFcn = createCallbackFcn(app, @setText, true);
+            app.waht.Position = [395 581 100 22];
+            app.waht.Text = {'^'; ''};
+
+            % Create laydu
+            app.laydu = uibutton(app.UIFigure, 'push');
+            app.laydu.ButtonPushedFcn = createCallbackFcn(app, @setText, true);
+            app.laydu.Position = [523 581 100 22];
+            app.laydu.Text = '%';
+
+            % Show the figure after all components are created
+            app.UIFigure.Visible = 'on';
+        end
+    end
+
+    % App creation and deletion
+    methods (Access = public)
+
+        % Construct app
+        function app = Plotting
+
+            % Create UIFigure and components
+            createComponents(app)
+
+            % Register the app with App Designer
+            registerApp(app, app.UIFigure)
+
+            if nargout == 0
+                clear app
+            end
+        end
+
+        % Code that executes before app deletion
+        function delete(app)
+
+            % Delete UIFigure when app is deleted
+            delete(app.UIFigure)
+        end
+    end
+end
